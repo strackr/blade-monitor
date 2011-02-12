@@ -1,6 +1,8 @@
 package vcu.blademonitor.simpleMonitoringServices;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /******************************************************************************
  * 
@@ -8,26 +10,24 @@ import java.util.Vector;
  * 
  *         The MetricStructure defines how metrics are stored for the
  *         blade-monitor project. The node name (i.e. slave2) is stored as a
- *         string and the metrics are stored as a two-dimensional vector that
+ *         string and the metrics are stored as a two-dimensional ArrayList that
  *         stores the names, values, and time metric was taken.
  *****************************************************************************/
 public class MetricStructure {
 	private String nodeName;
-	private Vector<Vector<String>> metricList;
-
-	// contains metric name, metric value, and the time metric was taken
+	private List<MetricObject> metricList;
 
 	/**************************************************************************
 	 * 
 	 * @author Erik Test - 02/06/2011
 	 * 
 	 *         The MetricStructure is initialized with nodeName set to "N/A" and
-	 *         the metricList is initialized to an empty, 2D vector.
+	 *         the metricList is initialized to an empty, 2D ArrayList.
 	 * 
 	 *************************************************************************/
 	public MetricStructure() {
 		this.nodeName = "N/A";
-		this.metricList = new Vector<Vector<String>>();
+		this.metricList = new ArrayList<MetricObject>();
 	}
 
 	/**************************************************************************
@@ -36,7 +36,7 @@ public class MetricStructure {
 	 * 
 	 *         The MetricStructures is initialized with the nodeName set to the
 	 *         name specified by the user and the metricList is initialized to
-	 *         an empty, 2D vector
+	 *         an empty, 2D ArrayList
 	 * 
 	 * @param nodeName
 	 *            - the name that the nodeName will be set to (i.e. master1,
@@ -44,21 +44,21 @@ public class MetricStructure {
 	 *************************************************************************/
 	public MetricStructure(String nodeName) {
 		this.nodeName = nodeName;
-		this.metricList = new Vector<Vector<String>>();
+		this.metricList = new ArrayList<MetricObject>();
 	}
 
 	/**************************************************************************
 	 * 
 	 * @author Erik Test - 02/06/2011
 	 * 
-	 *         getNodeName is an accesser function the returns the name of the
+	 *         getNodeName is an access function the returns the name of the
 	 *         node (i.e. master1, slave2, etc.) for the given metric.
 	 * 
 	 * @return nodeName - the name of the node for the given metric (i.e.
 	 *         master1, slave2, etc.)
 	 * 
 	 *************************************************************************/
-	public String getNodeName() {
+	public final String getNodeName() {
 		return this.nodeName;
 	}
 
@@ -73,7 +73,7 @@ public class MetricStructure {
 	 *            - the name to be used for the given metric
 	 * 
 	 *************************************************************************/
-	public void setNodeName(String nodeName) {
+	public final void setNodeName(String nodeName) {
 		this.nodeName = nodeName;
 	}
 
@@ -88,11 +88,11 @@ public class MetricStructure {
 	 *         node
 	 * 
 	 *************************************************************************/
-	public Vector<String> listMetricNames() {
-		Vector<String> returnList = new Vector<String>();
+	public final List<String> listMetricNames() {
+		ArrayList<String> returnList = new ArrayList<String>();
 
 		for (int i = 0; i < this.metricList.size(); i++) {
-			returnList.add(this.metricList.elementAt(i).elementAt(0));
+			returnList.add(this.metricList.get(i).getName());
 			// metric i's name
 		}
 
@@ -111,21 +111,20 @@ public class MetricStructure {
 	 *            - the user specified metricName to search for within
 	 *            metricList
 	 * 
-	 * @return returns a Vector of Strings that contain the metric name, value,
-	 *         and time. If the metric doesn't exist in the metricList, then
+	 * @return returns a MetricObject that contains the name, value and time of
+	 *         a metric. If the metric doesn't exist in the metricList, then
 	 *         null is returned.
 	 * 
 	 *************************************************************************/
-	public Vector<String> getMetrics(String metricName) {
-		Vector<String> returnVector = null;
+	public final MetricObject getMetrics(String metricName) {
+		MetricObject returnMetric = null;
 		int myIndex = metricAt(metricName);
 
 		if (myIndex != -1) {
-			returnVector = new Vector<String>();
-			returnVector.addAll(this.metricList.elementAt(myIndex));
+			returnMetric = this.metricList.get(myIndex);
 		}
 
-		return returnVector;
+		return returnMetric;
 	}
 
 	/**************************************************************************
@@ -142,14 +141,11 @@ public class MetricStructure {
 	 * @return true if the metric was added successfully, false otherwise.
 	 * 
 	 *************************************************************************/
-	public boolean addMetric(String metricName) {
+	public final boolean addMetric(String metricName) {
 		boolean added = false;
 
 		if (metricAt(metricName) == -1) {
-			Vector<String> temp = new Vector<String>();
-			temp.add(metricName);
-			temp.add("");
-			temp.add("");
+			MetricObject temp = new MetricObject(metricName);
 			this.metricList.add(temp);
 			added = true;
 		}
@@ -173,9 +169,9 @@ public class MetricStructure {
 	 *         the metric does not exist in metric list.
 	 * 
 	 *************************************************************************/
-	private int metricAt(String metricName) {
+	private final int metricAt(String metricName) {
 		for (int i = 0; i < this.metricList.size(); i++) {
-			if (this.metricList.elementAt(i).elementAt(0).equals(metricName)) {
+			if (this.metricList.get(i).getName().equals(metricName)) {
 				return i;
 			}
 		}
@@ -201,12 +197,12 @@ public class MetricStructure {
 	 *         existence of metricName within metricList)
 	 * 
 	 *************************************************************************/
-	public boolean setMetricValue(String metricName, String strValue) {
+	public final boolean setMetricValue(String metricName, double value) {
 		boolean set = false;
 		int myIndex = metricAt(metricName);
 
 		if (myIndex != -1) {
-			this.metricList.elementAt(myIndex).set(1, strValue);
+			this.metricList.get(myIndex).setValue(value);
 			set = true;
 		}
 
@@ -231,12 +227,12 @@ public class MetricStructure {
 	 *         existence of metricName within metricList)
 	 * 
 	 *************************************************************************/
-	public boolean setMetricTime(String metricName, String strTime) {
+	public final boolean setMetricTime(String metricName, Date time) {
 		boolean set = false;
 		int myIndex = metricAt(metricName);
 
 		if (myIndex != -1) {
-			this.metricList.elementAt(myIndex).set(2, strTime);
+			this.metricList.get(myIndex).setTime(time);
 			set = true;
 		}
 
