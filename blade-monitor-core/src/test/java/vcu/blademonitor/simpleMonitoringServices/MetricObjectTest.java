@@ -69,8 +69,8 @@ public class MetricObjectTest {
 
 	@Test
 	public final void testSetTimeCalendar() {
-		MetricObject myMetric = new MetricObject("Metric", 0.05,
-				(Calendar) null);
+		MetricObject myMetric = new MetricObject("Metric", 0.05, Calendar
+				.getInstance().getTime());
 		Calendar myCalendar = Calendar.getInstance();
 		myMetric.setTime(myCalendar);
 
