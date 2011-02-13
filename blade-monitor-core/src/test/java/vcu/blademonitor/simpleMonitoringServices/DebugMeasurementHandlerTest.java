@@ -47,9 +47,9 @@ public class DebugMeasurementHandlerTest {
 			assertTrue(lines[i].matches(regex));
 			i++;
 			// validate metric time
-			regex = "Metric Time  -> [a-zA-Z0-9 ]+";
+			regex = "Metric Time  -> [a-zA-Z0-9: ]+";
 			assertTrue("*" + lines[i]
-					+ "* does not match *Metric Time  -> [a-zA-Z0-9 ]+*",
+					+ "* does not match *Metric Time  -> [a-zA-Z0-9: ]+*",
 					lines[i].matches(regex));
 		}
 	}
