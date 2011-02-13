@@ -7,9 +7,9 @@ import java.util.Random;
 import vcu.blademonitor.simpleMonitoringServices.MetricStructure;
 
 public class RandomMetric {
-	private final int randMax = 10;
+	private static final int randMax = 10;
 
-	public MetricStructure createRandomMetric() {
+	public static MetricStructure createRandomMetric() {
 		MetricStructure myMetric = new MetricStructure("RandomNode");
 		Random generator = new Random();
 		int loopLimit = generator.nextInt(randMax);
@@ -19,10 +19,10 @@ public class RandomMetric {
 		Date metricTime;
 
 		for (int i = 0; i < loopLimit; i++) {
-			metricName = "RandomeMetric_" + i;
+			metricName = "RandomMetric_" + i;
 			myMetric.addMetric(metricName);
 
-			metricValue = generator.nextInt(randMax);
+			metricValue = generator.nextInt(randMax) + 1;
 			myMetric.setMetricValue(metricName, metricValue);
 
 			metricTime = Calendar.getInstance().getTime();
