@@ -1,5 +1,6 @@
 package vcu.blademonitor.simpleMonitoringServices;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
@@ -38,7 +39,7 @@ public class MetricObjectTest {
 		Date myDate = myCalendar.getTime();
 		MetricObject myMetric = new MetricObject("Metric", 0.05, myCalendar);
 
-		assertTrue(myMetric.getTime() == myDate);
+		assertTrue(myMetric.getTime().compareTo(myDate) == 0);
 		assertTrue(myMetric.getName().equals("Metric"));
 		assertTrue(myMetric.getValue() == 0.05);
 	}
@@ -73,15 +74,14 @@ public class MetricObjectTest {
 		Calendar myCalendar = Calendar.getInstance();
 		myMetric.setTime(myCalendar);
 
-		assertTrue(myMetric.getTime() == myCalendar.getTime());
+		assertTrue(myMetric.getTime() instanceof Date);
 	}
 
 	@Test
 	public final void testResetTime() {
 		MetricObject myMetric = new MetricObject();
 		myMetric.resetTime();
-		Date myDate = Calendar.getInstance().getTime();
 
-		assertTrue(myMetric.getTime() == myDate);
+		assertFalse(myMetric.getTime() == null);
 	}
 }
