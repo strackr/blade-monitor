@@ -40,11 +40,13 @@ public class DebugMeasurementHandlerTest {
 		for (int i = 1; i < lines.length; i++) {
 			// validate metric name
 			regex = "Metric Name  -> RandomMetric_[0-9]+";
-			assertTrue(lines[i].matches(regex));
+			assertTrue("*" + lines[i] + "* does not match *" + regex + "*",
+					lines[i].matches(regex));
 			i++;
 			// validate metric value
 			regex = "Metric Value -> [0-9]+.[0-9]+";
-			assertTrue(lines[i].matches(regex));
+			assertTrue("*" + lines[i] + "* does not match *" + regex + "*",
+					lines[i].matches(regex));
 			i++;
 			// validate metric time
 			regex = "Metric Time  -> [a-zA-Z0-9: ]+";
