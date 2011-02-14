@@ -1,6 +1,8 @@
 package vcu.blademonitor.simpleMonitoringServices;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import vcu.blademonitor.logging.Log;
 
 /**
  * 
@@ -13,6 +15,8 @@ import java.util.ArrayList;
 
 public class DebugMeasurementHandler implements MeasurementHandler {
 
+	private static Log log = Log.instance();
+
 	/**
 	 * @author Erik - 02/13/2011
 	 * 
@@ -24,16 +28,14 @@ public class DebugMeasurementHandler implements MeasurementHandler {
 	 */
 	@Override
 	public void handleMeasurement(MetricStructure myStructure) {
-		System.out.println("Node Name -> " + myStructure.getNodeName());
+		log.debug("Node Name -> {0}", myStructure.getNodeName());
 
-		ArrayList<String> metricNames = (ArrayList<String>) myStructure
-				.listMetricNames();
-		MetricObject tempObject = null;
-		for (int i = 0; i < metricNames.size(); i++) {
-			tempObject = myStructure.getMetrics(metricNames.get(i));
-			System.out.println("Metric Name  -> " + tempObject.getName());
-			System.out.println("Metric Value -> " + tempObject.getValue());
-			System.out.println("Metric Time  -> " + tempObject.getTime());
+		List<String> metricNames = myStructure.listMetricNames();
+		for (String metricName : metricNames) {
+			MetricObject tempObject = myStructure.getMetrics(metricName);
+			log.debug("Metric Name  -> {0}", tempObject.getName());
+			log.debug("Metric Value -> {0,number,#.00}", tempObject.getValue());
+			log.debug("Metric Time  -> {0,date,long}", tempObject.getTime());
 		}
 	}
 
