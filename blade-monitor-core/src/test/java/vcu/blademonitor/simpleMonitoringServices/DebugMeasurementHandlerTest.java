@@ -8,8 +8,6 @@ import java.io.PrintStream;
 import org.junit.Before;
 import org.junit.Test;
 
-import vcu.blademonitor.RandomMetric.RandomMetric;
-
 public class DebugMeasurementHandlerTest {
 	private final static String lineSeparator = System
 			.getProperty("line.separator");
@@ -25,7 +23,8 @@ public class DebugMeasurementHandlerTest {
 		System.setOut(printer);
 
 		DebugMeasurementHandler myHandler = new DebugMeasurementHandler();
-		myHandler.handleMeasurement(RandomMetric.createRandomMetric());
+		RandomStatisticsProvider provider = new RandomStatisticsProvider(10);
+		myHandler.handleMeasurement(provider.getStats());
 
 		printer.flush();
 		String outputString = output.toString();

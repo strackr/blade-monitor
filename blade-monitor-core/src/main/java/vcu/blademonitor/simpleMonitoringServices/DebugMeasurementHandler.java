@@ -34,7 +34,6 @@ public class DebugMeasurementHandler implements MeasurementHandler {
 			System.out.println("Metric Name  -> " + tempObject.getName());
 			System.out.println("Metric Value -> " + tempObject.getValue());
 			System.out.println("Metric Time  -> " + tempObject.getTime());
-			System.out.println();
 		}
 	}
 

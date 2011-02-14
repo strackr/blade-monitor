@@ -1,5 +1,6 @@
-package vcu.blademonitor.RandomMetric;
+package vcu.blademonitor.simpleMonitoringServices;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -8,10 +9,7 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 
-import vcu.blademonitor.simpleMonitoringServices.MetricObject;
-import vcu.blademonitor.simpleMonitoringServices.MetricStructure;
-
-public class RandomMetricTest {
+public class RandomStatisticsProviderTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -19,8 +17,13 @@ public class RandomMetricTest {
 
 	@Test
 	public final void testCreateRandomMetric() {
-		MetricStructure ms = RandomMetric.createRandomMetric();
+		int resourceLimit = 10;
+		RandomStatisticsProvider provider = new RandomStatisticsProvider(resourceLimit);
+
+		MetricStructure ms = provider.getStats();
+
 		assertTrue(ms.getNodeName().equals("RandomNode"));
+		assertEquals(resourceLimit, ms.listMetricNames().size());
 
 		MetricObject myMetricObject = null;
 		ArrayList<String> myMetrics = (ArrayList<String>) ms.listMetricNames();
@@ -33,4 +36,5 @@ public class RandomMetricTest {
 			assertTrue(myMetricObject.getValue() > 0);
 		}
 	}
+
 }
