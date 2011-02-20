@@ -1,4 +1,4 @@
-package vcu.blademonitor.simpleMonitoringServices;
+package vcu.blademonitor.monitoring;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

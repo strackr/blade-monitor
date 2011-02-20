@@ -1,7 +1,7 @@
 /**
  * 
  */
-package vcu.blademonitor.simpleMonitoringServices;
+package vcu.blademonitor.monitoring;
 
 /**
  * @author Erik - 02/13/2011

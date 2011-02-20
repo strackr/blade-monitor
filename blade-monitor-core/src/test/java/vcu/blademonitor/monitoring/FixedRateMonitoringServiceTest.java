@@ -1,4 +1,4 @@
-package vcu.blademonitor.simpleMonitoringServices;
+package vcu.blademonitor.monitoring;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
@@ -13,6 +13,11 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+
+import vcu.blademonitor.monitoring.FixedRateMonitoringService;
+import vcu.blademonitor.monitoring.MeasurementHandler;
+import vcu.blademonitor.monitoring.MetricStructure;
+import vcu.blademonitor.monitoring.StatisticsProvider;
 
 public class FixedRateMonitoringServiceTest {
 

@@ -1,8 +1,8 @@
 package vcu.blademonitor;
 
-import vcu.blademonitor.simpleMonitoringServices.DebugMeasurementHandler;
-import vcu.blademonitor.simpleMonitoringServices.RandomStatisticsProvider;
-import vcu.blademonitor.simpleMonitoringServices.SingleExecutionMonitoringService;
+import vcu.blademonitor.monitoring.DebugMeasurementHandler;
+import vcu.blademonitor.monitoring.RandomStatisticsProvider;
+import vcu.blademonitor.monitoring.SingleExecutionMonitoringService;
 
 /**
  * Blade monitor entry point.

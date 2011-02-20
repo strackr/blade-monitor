@@ -1,4 +1,4 @@
-package vcu.blademonitor.simpleMonitoringServices;
+package vcu.blademonitor.monitoring;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -8,6 +8,10 @@ import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import vcu.blademonitor.monitoring.MetricObject;
+import vcu.blademonitor.monitoring.MetricStructure;
+import vcu.blademonitor.monitoring.RandomStatisticsProvider;
 
 public class RandomStatisticsProviderTest {
 
