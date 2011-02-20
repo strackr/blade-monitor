@@ -2,6 +2,7 @@ package vcu.blademonitor.logging;
 
 import java.text.MessageFormat;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
@@ -44,35 +45,51 @@ public class Log {
 	}
 
 	public void debug(String message, Object... params) {
-		logger.debug(MessageFormat.format(message, params));
+		if (logger.isEnabledFor(Level.DEBUG)) {
+			logger.debug(MessageFormat.format(message, params));
+		}
 	}
 
 	public void debug(String message, Throwable throwable, Object... params) {
-		logger.debug(MessageFormat.format(message, params), throwable);
+		if (logger.isEnabledFor(Level.DEBUG)) {
+			logger.debug(MessageFormat.format(message, params), throwable);
+		}
 	}
 
 	public void info(String message, Object... params) {
-		logger.info(MessageFormat.format(message, params));
+		if (logger.isEnabledFor(Level.INFO)) {
+			logger.info(MessageFormat.format(message, params));
+		}
 	}
 
 	public void info(String message, Throwable throwable, Object... params) {
-		logger.info(MessageFormat.format(message, params), throwable);
+		if (logger.isEnabledFor(Level.INFO)) {
+			logger.info(MessageFormat.format(message, params), throwable);
+		}
 	}
 
 	public void warn(String message, Object... params) {
-		logger.warn(MessageFormat.format(message, params));
+		if (logger.isEnabledFor(Level.WARN)) {
+			logger.warn(MessageFormat.format(message, params));
+		}
 	}
 
 	public void warn(String message, Throwable throwable, Object... params) {
-		logger.warn(MessageFormat.format(message, params), throwable);
+		if (logger.isEnabledFor(Level.WARN)) {
+			logger.warn(MessageFormat.format(message, params), throwable);
+		}
 	}
 
 	public void error(String message, Object... params) {
-		logger.error(MessageFormat.format(message, params));
+		if (logger.isEnabledFor(Level.ERROR)) {
+			logger.error(MessageFormat.format(message, params));
+		}
 	}
 
 	public void error(String message, Throwable throwable, Object... params) {
-		logger.error(MessageFormat.format(message, params), throwable);
+		if (logger.isEnabledFor(Level.ERROR)) {
+			logger.error(MessageFormat.format(message, params), throwable);
+		}
 	}
 
 }
