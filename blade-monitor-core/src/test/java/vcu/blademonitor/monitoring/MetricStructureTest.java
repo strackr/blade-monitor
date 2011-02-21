@@ -1,4 +1,4 @@
-package vcu.blademonitor.simpleMonitoringServices;
+package vcu.blademonitor.monitoring;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.Test;
+
+import vcu.blademonitor.monitoring.MetricStructure;
 
 public class MetricStructureTest {
 

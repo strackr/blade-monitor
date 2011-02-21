@@ -1,4 +1,4 @@
-package vcu.blademonitor.simpleMonitoringServices;
+package vcu.blademonitor.monitoring;
 
 import java.util.Calendar;
 import java.util.Date;

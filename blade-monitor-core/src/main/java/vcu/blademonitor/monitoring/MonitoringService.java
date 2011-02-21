@@ -1,4 +1,4 @@
-package vcu.blademonitor.simpleMonitoringServices;
+package vcu.blademonitor.monitoring;
 
 /**
  * Common interface of the monitoring services (classes responsible for

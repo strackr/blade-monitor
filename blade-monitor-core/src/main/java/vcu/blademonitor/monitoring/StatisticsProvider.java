@@ -1,4 +1,4 @@
-package vcu.blademonitor.simpleMonitoringServices;
+package vcu.blademonitor.monitoring;
 
 /**
  * Interface for classes responsible for providing system statistics (CPU/memory
