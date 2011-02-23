@@ -1,7 +1,6 @@
 package vcu.blademonitor.monitoring;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /******************************************************************************
@@ -16,19 +15,6 @@ import java.util.List;
 public class MetricStructure {
 	private String nodeName;
 	private List<MetricObject> metricList;
-
-	/**************************************************************************
-	 * 
-	 * @author Erik Test - 02/06/2011
-	 * 
-	 *         The MetricStructure is initialized with nodeName set to "N/A" and
-	 *         the metricList is initialized to an empty, 2D ArrayList.
-	 * 
-	 *************************************************************************/
-	public MetricStructure() {
-		this.nodeName = "N/A";
-		this.metricList = new ArrayList<MetricObject>();
-	}
 
 	/**************************************************************************
 	 * 
@@ -60,21 +46,6 @@ public class MetricStructure {
 	 *************************************************************************/
 	public final String getNodeName() {
 		return this.nodeName;
-	}
-
-	/**************************************************************************
-	 * 
-	 * @author Erik Test - 02/06/2011
-	 * 
-	 *         setNodeName is a setting function that sets the name of the node
-	 *         for this metric (i.e. master1, slave2, etc.)
-	 * 
-	 * @param nodeName
-	 *            - the name to be used for the given metric
-	 * 
-	 *************************************************************************/
-	public final void setNodeName(String nodeName) {
-		this.nodeName = nodeName;
 	}
 
 	/**************************************************************************
@@ -136,17 +107,21 @@ public class MetricStructure {
 	 *         metric already exists, however, the metric is not added and the
 	 *         return value is false.
 	 * 
-	 * @param metricName
-	 *            - the metricName that the user wants to add to the metricList
+	 * @updated Erik Test - 02/22/2011
+	 * 
+	 *          Updated the parameter to take on an object instead of a name.
+	 * 
+	 * @param myObject
+	 *            - the MetricObject that the user wants to add to the
+	 *            metricList
 	 * @return true if the metric was added successfully, false otherwise.
 	 * 
 	 *************************************************************************/
-	public final boolean addMetric(String metricName) {
+	public final boolean addMetric(MetricObject myObject) {
 		boolean added = false;
 
-		if (metricAt(metricName) == -1) {
-			MetricObject temp = new MetricObject(metricName);
-			this.metricList.add(temp);
+		if (metricAt(myObject.getName()) == -1) {
+			this.metricList.add(myObject);
 			added = true;
 		}
 
@@ -177,65 +152,5 @@ public class MetricStructure {
 		}
 
 		return -1;
-	}
-
-	/**************************************************************************
-	 * 
-	 * @author Erik Test - 02/06/2011
-	 * 
-	 *         setMetricValue sets the value for metricName within metricList if
-	 *         metricName exists within metric list. Returns false if the metric
-	 *         value was not set (because the metric doesn't exist within
-	 *         metricList).
-	 * 
-	 * @param metricName
-	 *            - the metricName within metricList to set to strValue
-	 * @param strValue
-	 *            - the value to set for metricName
-	 * 
-	 * @return a boolean indicating if the metric was set or not (based on the
-	 *         existence of metricName within metricList)
-	 * 
-	 *************************************************************************/
-	public final boolean setMetricValue(String metricName, double value) {
-		boolean set = false;
-		int myIndex = metricAt(metricName);
-
-		if (myIndex != -1) {
-			this.metricList.get(myIndex).setValue(value);
-			set = true;
-		}
-
-		return set;
-	}
-
-	/**************************************************************************
-	 * 
-	 * @author Erik Test - 02/06/2011
-	 * 
-	 *         setMetricTime sets the time for metricName within metricList if
-	 *         metricName exists within metric list. Returns false if the metric
-	 *         time was not set (because the metric doesn't exist within
-	 *         metricList).
-	 * 
-	 * @param metricName
-	 *            - the metricName within metricList to set to strTime
-	 * @param strTime
-	 *            - the time to set for metricName
-	 * 
-	 * @return a boolean indicating if the metric was set or not (based on the
-	 *         existence of metricName within metricList)
-	 * 
-	 *************************************************************************/
-	public final boolean setMetricTime(String metricName, Date time) {
-		boolean set = false;
-		int myIndex = metricAt(metricName);
-
-		if (myIndex != -1) {
-			this.metricList.get(myIndex).setTime(time);
-			set = true;
-		}
-
-		return set;
 	}
 }
