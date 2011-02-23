@@ -14,11 +14,6 @@ import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import vcu.blademonitor.monitoring.FixedRateMonitoringService;
-import vcu.blademonitor.monitoring.MeasurementHandler;
-import vcu.blademonitor.monitoring.MetricStructure;
-import vcu.blademonitor.monitoring.StatisticsProvider;
-
 public class FixedRateMonitoringServiceTest {
 
 	@Test
@@ -33,13 +28,14 @@ public class FixedRateMonitoringServiceTest {
 				return null;
 			}
 		};
-		doAnswer(singleExecutionAnswer).when(executor)
-				.scheduleAtFixedRate(any(Runnable.class), anyLong(), anyLong(), any(TimeUnit.class));
-		FixedRateMonitoringService service = new FixedRateMonitoringService(executor, 1000);
+		doAnswer(singleExecutionAnswer).when(executor).scheduleAtFixedRate(
+				any(Runnable.class), anyLong(), anyLong(), any(TimeUnit.class));
+		FixedRateMonitoringService service = new FixedRateMonitoringService(
+				executor, 1000);
 
 		MeasurementHandler handler = mock(MeasurementHandler.class);
 
-		MetricStructure measurement = new MetricStructure();
+		MetricStructure measurement = new MetricStructure("node1");
 		StatisticsProvider provider = mock(StatisticsProvider.class);
 		when(provider.getStats()).thenReturn(measurement);
 
@@ -48,7 +44,8 @@ public class FixedRateMonitoringServiceTest {
 		service.registerStatisticsProvider(provider);
 
 		// then
-		verify(executor).scheduleAtFixedRate(any(Runnable.class), anyLong(), anyLong(), any(TimeUnit.class));
+		verify(executor).scheduleAtFixedRate(any(Runnable.class), anyLong(),
+				anyLong(), any(TimeUnit.class));
 		verify(handler).handleMeasurement(measurement);
 	}
 
