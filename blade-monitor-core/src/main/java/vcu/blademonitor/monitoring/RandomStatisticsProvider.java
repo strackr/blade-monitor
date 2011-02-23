@@ -1,8 +1,8 @@
 package vcu.blademonitor.monitoring;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Random;
+
+import org.joda.time.DateTime;
 
 public class RandomStatisticsProvider implements StatisticsProvider {
 
@@ -19,13 +19,10 @@ public class RandomStatisticsProvider implements StatisticsProvider {
 
 		for (int i = 0; i < resourceLimit; i++) {
 			String metricName = "RandomMetric_" + i;
-			myMetric.addMetric(metricName);
-
 			double metricValue = generator.nextInt(resourceLimit) + 1;
-			myMetric.setMetricValue(metricName, metricValue);
-
-			Date metricTime = Calendar.getInstance().getTime();
-			myMetric.setMetricTime(metricName, metricTime);
+			DateTime metricTime = new DateTime();
+			myMetric.addMetric(new MetricObject(metricName, metricValue,
+					metricTime));
 		}
 
 		return myMetric;
