@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 /**
  * Logger implementation.
  */
-public class Log {
+public final class Log {
 
 	/**
 	 * Create logger for particular class.

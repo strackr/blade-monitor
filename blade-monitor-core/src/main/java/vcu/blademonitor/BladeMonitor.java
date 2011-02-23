@@ -14,6 +14,14 @@ public class BladeMonitor {
 	private static final int MONITORING_DELAY = 5000;
 
 	public static void main(String[] args) {
+		BladeMonitor monitor = new BladeMonitor();
+		monitor.start();
+	}
+
+	/**
+	 * Starts monitoring service.
+	 */
+	public void start() {
 		// create monitoring service and register measurement handler with
 		// statistics provider
 		MonitoringServiceFactory factory = new MonitoringServiceFactory();
