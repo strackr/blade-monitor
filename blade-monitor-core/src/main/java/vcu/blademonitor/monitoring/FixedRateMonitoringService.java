@@ -3,10 +3,14 @@ package vcu.blademonitor.monitoring;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import vcu.blademonitor.logging.Log;
+
 /**
  * Monitoring service designated to collect measurements at fixed rate.
  */
 public class FixedRateMonitoringService extends AbstractMonitoringService {
+
+	private static final Log log = Log.instance();
 
 	/**
 	 * Executor service.
@@ -36,7 +40,12 @@ public class FixedRateMonitoringService extends AbstractMonitoringService {
 		Runnable command = new Runnable() {
 			@Override
 			public void run() {
-				distributeMeasurement(provider.getStats());
+				try {
+					distributeMeasurement(provider.getStats());
+				} catch (RuntimeException e) {
+					log.warn("measurement distribution error", e);
+					throw e;
+				}
 			}
 		};
 		executor.scheduleAtFixedRate(command, 0, delay, TimeUnit.MILLISECONDS);

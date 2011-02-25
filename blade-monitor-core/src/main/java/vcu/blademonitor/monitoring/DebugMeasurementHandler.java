@@ -35,7 +35,7 @@ public class DebugMeasurementHandler implements MeasurementHandler {
 			MetricObject tempObject = myStructure.getMetrics(metricName);
 			log.debug("Metric Name  -> {0}", tempObject.getName());
 			log.debug("Metric Value -> {0,number,#.00}", tempObject.getValue());
-			log.debug("Metric Time  -> {0,date,long}", tempObject.getTime());
+			log.debug("Metric Time  -> {0}", tempObject.getTime());
 		}
 	}
 

@@ -5,11 +5,6 @@ import static org.mockito.Mockito.verify;
 
 import org.junit.Test;
 
-import vcu.blademonitor.monitoring.AbstractMonitoringService;
-import vcu.blademonitor.monitoring.MeasurementHandler;
-import vcu.blademonitor.monitoring.MetricStructure;
-import vcu.blademonitor.monitoring.StatisticsProvider;
-
 public class AbstractMonitoringServiceTest {
 
 	@Test
@@ -20,7 +15,7 @@ public class AbstractMonitoringServiceTest {
 				// nothing to do
 			}
 		};
-		MetricStructure measurement = new MetricStructure();
+		MetricStructure measurement = new MetricStructure("node1");
 		MeasurementHandler handler1 = mock(MeasurementHandler.class);
 		MeasurementHandler handler2 = mock(MeasurementHandler.class);
 

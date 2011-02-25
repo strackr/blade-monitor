@@ -4,14 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.Date;
 
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
-
-import vcu.blademonitor.monitoring.MetricObject;
-import vcu.blademonitor.monitoring.MetricStructure;
-import vcu.blademonitor.monitoring.RandomStatisticsProvider;
 
 public class RandomStatisticsProviderTest {
 
@@ -22,7 +18,8 @@ public class RandomStatisticsProviderTest {
 	@Test
 	public final void testCreateRandomMetric() {
 		int resourceLimit = 10;
-		RandomStatisticsProvider provider = new RandomStatisticsProvider(resourceLimit);
+		RandomStatisticsProvider provider = new RandomStatisticsProvider(
+				resourceLimit);
 
 		MetricStructure ms = provider.getStats();
 
@@ -36,7 +33,7 @@ public class RandomStatisticsProviderTest {
 			myMetricObject = ms.getMetrics("RandomMetric_" + i);
 
 			assertTrue(myMetricObject.getName().equals("RandomMetric_" + i));
-			assertTrue(myMetricObject.getTime() instanceof Date);
+			assertTrue(myMetricObject.getTime() instanceof DateTime);
 			assertTrue(myMetricObject.getValue() > 0);
 		}
 	}

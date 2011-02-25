@@ -6,18 +6,13 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 
-import vcu.blademonitor.monitoring.MeasurementHandler;
-import vcu.blademonitor.monitoring.MetricStructure;
-import vcu.blademonitor.monitoring.SingleExecutionMonitoringService;
-import vcu.blademonitor.monitoring.StatisticsProvider;
-
 public class SingleExecutionMonitoringServiceTest {
 
 	private final SingleExecutionMonitoringService service = new SingleExecutionMonitoringService();
 
 	@Test
 	public void shouldCollectStats() {
-		MetricStructure measurement = new MetricStructure();
+		MetricStructure measurement = new MetricStructure("node1");
 		StatisticsProvider provider = mock(StatisticsProvider.class);
 		when(provider.getStats()).thenReturn(measurement);
 		MeasurementHandler handler = mock(MeasurementHandler.class);
